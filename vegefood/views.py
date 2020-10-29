@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views import View
+from django.core.paginator import Paginator, EmptyPage
+
 from .settings.info import INFO
 
 
@@ -13,7 +15,7 @@ class IndexView(View):
 
 
 class ShopView(View):
-    def get(self, request):
+    def get(self, request, page=1):
         products_list = [
             {
                 'name': 'Bell Pepper',
@@ -83,6 +85,16 @@ class ShopView(View):
             }
         ]
 
-        contex = {'page_obj': products_list}
-        contex.update(INFO)
-        return render(request, 'vegefood/shop.html', contex)
+        product_on_page = 4
+        paginator = Paginator(products_list, product_on_page)
+
+        try:
+            products_list = paginator.page(page)
+            products_list.page_tuple = tuple(paginator.page_range)
+        except EmptyPage:
+            # products_list = paginator.get_page(1)
+            return redirect(reverse('shop'))
+
+        context = {'page_obj': products_list}
+        context.update(INFO)
+        return render(request, 'vegefood/shop.html', context)
