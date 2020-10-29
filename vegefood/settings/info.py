@@ -1,4 +1,6 @@
 INFO = {
-    'phone': '8 812 987-65-32',
-    'email': 'test@vegefood.ru'
+    'phone': '+7 (812) 111-22-33',
+    'email': 'SPB.test@test.spb',
+    'anatation': 'We are the BEST!!!',
+    'label': 'vegefoods shop'
 }

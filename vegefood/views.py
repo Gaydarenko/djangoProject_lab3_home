@@ -9,9 +9,9 @@ from .settings.info import INFO
 class IndexView(View):
     def get(self, request):
         # contex = INFO.copy()
-        contex = {}
-        contex.update(INFO)
-        return render(request, 'vegefood/index.html', contex)
+        context = {}
+        context.update(INFO)
+        return render(request, 'vegefood/index.html', context)
 
 
 class ShopView(View):
