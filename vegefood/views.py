@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import View
 from django.core.paginator import Paginator, EmptyPage
+# from .models import Product
 
 from .settings.info import INFO
 
@@ -16,6 +17,7 @@ class IndexView(View):
 
 class ShopView(View):
     def get(self, request, page=1):
+
         products_list = [
             {
                 'name': 'Bell Pepper',
@@ -96,5 +98,6 @@ class ShopView(View):
             return redirect(reverse('shop'))
 
         context = {'page_obj': products_list}
+        # context = {'page_obj': Product.objects.all()}
         context.update(INFO)
         return render(request, 'vegefood/shop.html', context)
